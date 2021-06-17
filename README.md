@@ -9,3 +9,8 @@ docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
 the following command should return alot of supported platforms
 docker buildx inspect --bootstrap
 
+## installation
+Download the release tar from releases, untar and install with apt
+```bash
+apt install -f ./*.deb
+```
