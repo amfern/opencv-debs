@@ -18,6 +18,8 @@ RUN apt-get install -y libopenblas-dev libatlas-base-dev libblas-dev
 RUN apt-get install -y liblapack-dev gfortran libhdf5-dev
 RUN apt-get install -y libprotobuf-dev libgoogle-glog-dev libgflags-dev
 RUN apt-get install -y protobuf-compiler
+RUN apt-get install -y libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev
+
 
 RUN git clone --depth 1 --branch 4.2.0 https://github.com/opencv/opencv.git
 RUN git clone --depth 1 --branch 4.2.0 https://github.com/opencv/opencv_contrib.git
@@ -36,8 +38,7 @@ RUN cmake \
     -D BUILD_TIFF=ON \
     -D WITH_FFMPEG=ON \
     -D WITH_TBB=ON \
-    -D BUILD_TBB=ON \
-    -D WITH_GSTREAMER=OFF \
+    -D WITH_GSTREAMER=ON \
     -D BUILD_TESTS=OFF \
     -D WITH_EIGEN=OFF \
     -D WITH_V4L=ON \
@@ -50,7 +51,8 @@ RUN cmake \
     -D BUILD_opencv_python3=TRUE \
     -D OPENCV_GENERATE_PKGCONFIG=ON \
     -D CPACK_BINARY_DEB=ON \
-    -D BUILD_EXAMPLES=OFF ..
+    -D BUILD_EXAMPLES=OFF \
+    ..
 
 RUN make -j$(nproc)
 RUN make install
