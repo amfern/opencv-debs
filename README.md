@@ -29,5 +29,6 @@ apt install -f ./*.deb
 If you encounter conflicts, either remove the current installation of opencv or overwrite the files with this command, although it is strongly 
 discouraged to overwriting files
 ```
-sudo apt -o Dpkg::Options::="--force-overwrite" install -f libopencv-dev ./*.deb
+apt install libopencv-dev 
+apt -o Dpkg::Options::="--force-overwrite" install ./*.deb
 ```
