@@ -11,6 +11,7 @@ docker buildx inspect --bootstrap
 
 ## compile:
 ```bash
+make release-amd64-tar # any x86
 make release-arm64-tar # raspberrypi 4
 make release-amd64-cuda-tar # any x86 with nvidia card
 make release-arm64-cuda-l4t-tar # nvidia jetson tx2(can be built only on nvidia jetson)
@@ -28,5 +29,5 @@ apt install -f ./*.deb
 If you encounter conflicts, either remove the current installation of opencv or overwrite the files with this command, although it is strongly 
 discouraged to overwriting files
 ```
-sudo apt -o Dpkg::Options::="--force-overwrite" install -f ./*.deb
+sudo apt -o Dpkg::Options::="--force-overwrite" install -f libopencv-dev ./*.deb
 ```
