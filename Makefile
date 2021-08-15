@@ -8,11 +8,17 @@ setup:
 image-arm64:
 	docker buildx build --platform linux/arm64 -t opencv-4.2-ubuntu-bionic-arm64-debs -o type=docker arm64
 
+# need to be run from l4t jetson device only
 image-arm64-cuda-l4t:
 	docker build -t opencv-4.2-ubuntu-bionic-arm64-cuda-l4t-debs arm64-cuda-l4t
 
+# need to be run cuda capable hardwre with nvidia runtime https://stackoverflow.com/questions/59691207/docker-build-with-nvidia-runtime
 image-amd64-cuda:
 	docker buildx build --platform linux/amd64 -t opencv-4.2-ubuntu-bionic-amd64-cuda-debs -o type=docker amd64-cuda
+
+# need to be run cuda capable hardwre with nvidia runtime https://stackoverflow.com/questions/59691207/docker-build-with-nvidia-runtime
+image-amd64-cuda-focal:
+	docker build -t opencv-4.5.2-ubuntu-focal-arm64-cuda-debs amd64-cuda-focal
 
 image-amd64:
 	docker buildx build --platform linux/amd64 -t opencv-4.2-ubuntu-bionic-amd64-debs -o type=docker amd64
@@ -28,6 +34,10 @@ release-arm64-cuda-l4t: image-arm64-cuda-l4t
 release-amd64-cuda: image-amd64-cuda
 	mkdir -p release/OpenCV-4.2.0-amd64-cuda
 	docker run -ti --rm -v `pwd`/release/OpenCV-4.2.0-amd64-cuda:/release opencv-4.2-ubuntu-bionic-amd64-cuda-debs bash -c "cp *.deb /release"
+
+release-amd64-cuda-focal: image-amd64-cuda-focal
+	mkdir -p release/OpenCV-4.5.2-amd64-cuda-focal
+	docker run -ti --rm -v `pwd`/release/OpenCV-4.5.2-amd64-cuda-focal:/release opencv-4.5.2-ubuntu-focal-arm64-cuda-debs bash -c "cp *.deb /release"
 
 release-amd64: image-amd64
 	mkdir -p release/OpenCV-4.2.0-amd64
