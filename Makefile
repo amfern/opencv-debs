@@ -8,11 +8,17 @@ setup:
 image-arm64:
 	docker buildx build --platform linux/arm64 -t opencv-4.2-ubuntu-bionic-arm64-debs -o type=docker arm64
 
+# need to be run from l4t jetson device only
 image-arm64-cuda-l4t:
 	docker build -t opencv-4.2-ubuntu-bionic-arm64-cuda-l4t-debs arm64-cuda-l4t
 
+# need to be run cuda capable hardwre with nvidia runtime https://stackoverflow.com/questions/59691207/docker-build-with-nvidia-runtime
 image-amd64-cuda:
 	docker buildx build --platform linux/amd64 -t opencv-4.2-ubuntu-bionic-amd64-cuda-debs -o type=docker amd64-cuda
+
+# need to be run cuda capable hardwre with nvidia runtime https://stackoverflow.com/questions/59691207/docker-build-with-nvidia-runtime
+image-amd64-cuda-focal:
+	docker build -t opencv-4.5.2-ubuntu-focal-arm64-cuda-debs amd64-cuda-focal
 
 image-amd64:
 	docker buildx build --platform linux/amd64 -t opencv-4.2-ubuntu-bionic-amd64-debs -o type=docker amd64
@@ -29,6 +35,10 @@ release-amd64-cuda: image-amd64-cuda
 	mkdir -p release/OpenCV-4.2.0-amd64-cuda
 	docker run -ti --rm -v `pwd`/release/OpenCV-4.2.0-amd64-cuda:/release opencv-4.2-ubuntu-bionic-amd64-cuda-debs bash -c "cp *.deb /release"
 
+release-amd64-cuda-focal: image-amd64-cuda-focal
+	mkdir -p release/OpenCV-4.5.2-amd64-cuda-focal
+	docker run -ti --rm -v `pwd`/release/OpenCV-4.5.2-amd64-cuda-focal:/release opencv-4.5.2-ubuntu-focal-arm64-cuda-debs bash -c "cp *.deb /release"
+
 release-amd64: image-amd64
 	mkdir -p release/OpenCV-4.2.0-amd64
 	docker run -ti --rm -v `pwd`/release/OpenCV-4.2.0-amd64:/release opencv-4.2-ubuntu-bionic-amd64-debs bash -c "cp *.deb /release"
@@ -41,6 +51,9 @@ release-arm64-cuda-l4t-tar: release-arm64-cuda-l4t
 
 release-amd64-cuda-tar: release-amd64-cuda
 	cd release && tar -czf OpenCV-4.2.0-amd64-cuda.tar.xz OpenCV-4.2.0-amd64-cuda
+
+release-amd64-cuda-focal-tar: release-amd64-cuda-focal
+	cd release && tar -czf OpenCV-4.5.2-amd64-cuda-focal.tar.xz OpenCV-4.5.2-amd64-cuda-focal
 
 release-amd64-tar: release-amd64
 	cd release && tar -czf OpenCV-4.2.0-amd64.tar.xz OpenCV-4.2.0-amd64

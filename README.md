@@ -15,6 +15,7 @@ make release-amd64-tar # any x86
 make release-arm64-tar # raspberrypi 4
 make release-amd64-cuda-tar # any x86 with nvidia card
 make release-arm64-cuda-l4t-tar # nvidia jetson tx2(can be built only on nvidia jetson)
+make release-amd64-cuda-focal-tar # any x86 ubuntu 20.04  with nvidia card 
 ```
 l4t jetson image must be build on jetson, with nvidia runtime enabled as default, as nvidia doesn't provide `nvcr.io/nvidia/cuda-arm64` container with 10.2 cuda.
 so libcuda.so and other libcublas.so must be mounted by the runtime
