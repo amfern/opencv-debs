@@ -1,7 +1,5 @@
 # Builds opencv 4.2 for ubuntu 18.04 on reaspbbery pi
 
-all: release
-
 setup:
 	docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
 
@@ -57,3 +55,5 @@ release-amd64-cuda-focal-tar: release-amd64-cuda-focal
 
 release-amd64-tar: release-amd64
 	cd release && tar -czf OpenCV-4.2.0-amd64.tar.xz OpenCV-4.2.0-amd64
+
+all: release-amd64-tar release-amd64-cuda-focal-tar release-amd64-cuda-tar release-arm64-tar

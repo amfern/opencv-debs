@@ -58,6 +58,8 @@ RUN cmake \
     -D OPENCV_DNN_CUDA=ON \
     -D WITH_CUDNN=ON \
     -D CPACK_BINARY_DEB=ON \
+    -D CPACK_SET_DESTDIR=OFF \
+    -D CPACK_PACKAGING_INSTALL_PREFIX=/usr/local \
     ..
 
 RUN make -j$(nproc)

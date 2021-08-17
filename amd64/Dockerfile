@@ -50,6 +50,8 @@ RUN cmake \
     -D ENABLE_FAST_MATH=ON \
     -D WITH_CUBLAS=ON \
     -D CPACK_BINARY_DEB=ON \
+    -D CPACK_SET_DESTDIR=OFF \
+    -D CPACK_PACKAGING_INSTALL_PREFIX=/usr/local \
     ..
 
 RUN make -j$(nproc)

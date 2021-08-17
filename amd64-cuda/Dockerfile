@@ -47,7 +47,6 @@ RUN cmake \
     -D BUILD_EXAMPLES=OFF \
     -D BUILD_opencv_python3=TRUE \
     -D OPENCV_GENERATE_PKGCONFIG=ON \
-    -D CUDA_ARCH_BIN=${ARCH_BIN} \
     -D ENABLE_FAST_MATH=ON \
     -D CUDA_FAST_MATH=ON \
     -D WITH_CUBLAS=ON \
@@ -55,6 +54,8 @@ RUN cmake \
     -D OPENCV_DNN_CUDA=ON \
     -D WITH_CUDNN=ON \
     -D CPACK_BINARY_DEB=ON \
+    -D CPACK_SET_DESTDIR=OFF \
+    -D CPACK_PACKAGING_INSTALL_PREFIX=/usr/local \
     ..
 
     # -D WITH_EIGEN=OFF \

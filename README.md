@@ -22,14 +22,10 @@ so libcuda.so and other libcublas.so must be mounted by the runtime
 https://forums.developer.nvidia.com/t/libcublas-file-size-is-0-in-jetson-docker-image/180676
 
 ## installation
-Download the release tar from releases, untar and install with apt
-```bash
-apt install -f ./*.deb
-```
+Download from (https://github.com/amfern/opencv-4.2-ubuntu-bionic-arm64-debs/releases)[releases], untar and install with apt
 
-If you encounter conflicts, either remove the current installation of opencv or overwrite the files with this command, although it is strongly 
-discouraged to overwriting files
-```
-apt install libopencv-dev 
-apt -o Dpkg::Options::="--force-overwrite" install ./*.deb
+For example this will install the opencv into /usr/local
+```bash
+wget -c https://github.com/amfern/opencv-4.2-ubuntu-bionic-arm64-debs/releases/download/0.0.6/OpenCV-4.5.2-amd64-cuda-focal.tar.xz -O - | tar -xz
+apt install -f ./OpenCV-4.5.2-amd64-cuda-focal/*.deb
 ```

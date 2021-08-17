@@ -52,6 +52,8 @@ RUN cmake \
     -D OPENCV_GENERATE_PKGCONFIG=ON \
     -D CPACK_BINARY_DEB=ON \
     -D BUILD_EXAMPLES=OFF \
+    -D CPACK_SET_DESTDIR=OFF \
+    -D CPACK_PACKAGING_INSTALL_PREFIX=/usr/local \
     ..
 
 RUN make -j$(nproc)
