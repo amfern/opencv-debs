@@ -34,7 +34,7 @@ WORKDIR /opencv/build
 RUN cmake \
     -D CUDA_TOOLKIT_ROOT_DIR=/usr/local/cuda-10.2/ \
     -D CMAKE_BUILD_TYPE=RELEASE \
-    -D CMAKE_INSTALL_PREFIX=/usr \
+    -D CMAKE_INSTALL_PREFIX=/usr/local/opencv-4.2.0 \
     -D OPENCV_EXTRA_MODULES_PATH=/opencv_contrib/modules \
     -D EIGEN_INCLUDE_PATH=/usr/include/eigen3 \
     -D WITH_OPENCL=OFF \
@@ -68,7 +68,7 @@ RUN cmake \
     -D BUILD_EXAMPLES=OFF \
     -D CPACK_BINARY_DEB=ON \
     -D CPACK_SET_DESTDIR=OFF \
-    -D CPACK_PACKAGING_INSTALL_PREFIX=/usr/local \
+    -D CPACK_PACKAGING_INSTALL_PREFIX=/usr/local/opencv-4.2.0 \
     ..
 
 RUN make -j$(nproc)

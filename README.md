@@ -24,8 +24,12 @@ https://forums.developer.nvidia.com/t/libcublas-file-size-is-0-in-jetson-docker-
 ## installation
 Download from (https://github.com/amfern/opencv-4.2-ubuntu-bionic-arm64-debs/releases)[releases], untar and install with apt
 
-For example this will install the opencv into /usr/local
+opencv will be installed into `/usr/local/<OPENCV VERSION>`, so the linker will need to point to this directory
+
+For example:
 ```bash
 wget -c https://github.com/amfern/opencv-4.2-ubuntu-bionic-arm64-debs/releases/download/0.0.6/OpenCV-4.5.2-amd64-cuda-focal.tar.xz -O - | tar -xz
 apt install -f ./OpenCV-4.5.2-amd64-cuda-focal/*.deb
+echo "/usr/local/opencv-4.5.2/lib" >> /etc/ld.so.conf.d/002_opencv_4.5.2.conf
+ldconfig
 ```

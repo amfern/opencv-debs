@@ -33,7 +33,7 @@ WORKDIR /opencv/build
 
 RUN cmake \
     -D CMAKE_BUILD_TYPE=RELEASE \
-    -D CMAKE_INSTALL_PREFIX=/usr/local \
+    -D CMAKE_INSTALL_PREFIX=/usr/local/opencv-4.5.2 \
     -D OPENCV_EXTRA_MODULES_PATH=/opencv_contrib/modules \
     -D WITH_OPENMP=ON \
     -D BUILD_TIFF=ON \
@@ -59,7 +59,7 @@ RUN cmake \
     -D WITH_CUDNN=ON \
     -D CPACK_BINARY_DEB=ON \
     -D CPACK_SET_DESTDIR=OFF \
-    -D CPACK_PACKAGING_INSTALL_PREFIX=/usr/local \
+    -D CPACK_PACKAGING_INSTALL_PREFIX=/usr/local/opencv-4.5.2 \
     ..
 
 RUN make -j$(nproc)
