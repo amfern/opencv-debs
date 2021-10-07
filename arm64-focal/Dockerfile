@@ -1,4 +1,4 @@
-FROM arm64v8/ubuntu:20.04
+FROM arm64v8/ubuntu:20.04 as build
 
 ENV DEBIAN_FRONTEND=noninteractive
 
@@ -33,7 +33,6 @@ RUN cmake \
     -D CMAKE_INSTALL_PREFIX=/usr/local/opencv-4.5.2 \
     -D OPENCV_EXTRA_MODULES_PATH=/opencv_contrib/modules \
     -D ENABLE_NEON=ON \
-    -D ENABLE_VFPV3=ON \
     -D WITH_OPENMP=ON \
     -D WITH_OPENCL=OFF \
     -D BUILD_ZLIB=ON \
@@ -63,3 +62,8 @@ RUN cmake \
 RUN make -j$(nproc)
 RUN make install
 RUN make package
+
+RUN mkdir /OpenCV-4.5.2-arm64-focal && cp *.deb /OpenCV-4.5.2-arm64-focal
+
+FROM scratch as artifact
+COPY --from=build /OpenCV-4.5.2-arm64-focal /OpenCV-4.5.2-arm64-focal

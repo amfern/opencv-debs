@@ -1,4 +1,4 @@
-FROM amd64/ubuntu:18.04
+FROM amd64/ubuntu:18.04 as build
 
 RUN apt update && apt install -y \
     build-essential \
@@ -57,3 +57,8 @@ RUN cmake \
 RUN make -j$(nproc)
 RUN make install
 RUN make package
+
+RUN mkdir /OpenCV-4.2.0-arm64 && cp *.deb /OpenCV-4.2.0-arm64
+
+FROM scratch as artifact
+COPY --from=build /OpenCV-4.2.0-arm64 /OpenCV-4.2.0-arm64

@@ -1,4 +1,4 @@
-FROM nvidia/cuda:10.2-cudnn8-devel-ubuntu18.04
+FROM nvidia/cuda:10.2-cudnn8-devel-ubuntu18.04 as build
 
 RUN apt update && apt install -y \
     build-essential \
@@ -58,14 +58,11 @@ RUN cmake \
     -D CPACK_PACKAGING_INSTALL_PREFIX=/usr/local/opencv-4.2.0 \
     ..
 
-    # -D WITH_EIGEN=OFF \
-    # -D WITH_VTK=OFF \
-    # -D WITH_OPENCL=OFF \
-    # -D BUILD_TBB=ON \
-    # -D WITH_GSTREAMER_0_10=OFF \ ?????
-    # -D CUDNN_VERSION='8.0' \ ???
-    # -D EIGEN_INCLUDE_PATH="/usr/include/eigen3" \ ???
-
 RUN make -j$(nproc)
 RUN make install
 RUN make package
+
+RUN mkdir /OpenCV-4.2.0-amd64-cuda && cp *.deb /OpenCV-4.2.0-amd64-cuda
+
+FROM scratch as artifact
+COPY --from=build /OpenCV-4.2.0-amd64-cuda /OpenCV-4.2.0-amd64-cuda

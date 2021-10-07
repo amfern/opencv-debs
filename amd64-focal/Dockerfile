@@ -1,4 +1,4 @@
-FROM amd64/ubuntu20.04
+FROM amd64/ubuntu:20.04 as build
 
 ENV DEBIAN_FRONTEND=noninteractive
 
@@ -58,3 +58,8 @@ RUN cmake \
 RUN make -j$(nproc)
 RUN make install
 RUN make package
+
+RUN mkdir /OpenCV-4.5.2-amd64-focal && cp *.deb /OpenCV-4.5.2-amd64-focal
+
+FROM scratch as artifact
+COPY --from=build /OpenCV-4.5.2-amd64-focal /OpenCV-4.5.2-amd64-focal

@@ -1,4 +1,4 @@
-FROM nvidia/cuda:11.3.0-cudnn8-devel-ubuntu20.04
+FROM nvidia/cuda:11.3.0-cudnn8-devel-ubuntu20.04 as build
 
 # the install is based on this guide
 # https://gist.github.com/raulqf/f42c718a658cddc16f9df07ecc627be7
@@ -65,3 +65,8 @@ RUN cmake \
 RUN make -j$(nproc)
 RUN make install
 RUN make package
+
+RUN mkdir /OpenCV-4.5.2-amd64-cuda-focal && cp *.deb /OpenCV-4.5.2-amd64-cuda-focal
+
+FROM scratch as artifact
+COPY --from=build /OpenCV-4.5.2-amd64-cuda-focal /OpenCV-4.5.2-amd64-cuda-focal
