@@ -28,7 +28,7 @@ opencv will be installed into `/usr/local/<OPENCV VERSION>`, so the linker will 
 
 For example:
 ```bash
-wget -c https://github.com/amfern/opencv-4.2-ubuntu-bionic-arm64-debs/releases/download/0.0.6/OpenCV-4.5.2-amd64-cuda-focal.tar.xz -O - | tar -xz
+wget -c https://github.com/amfern/opencv-4.2-ubuntu-bionic-arm64-debs/releases/download/0.0.7/OpenCV-4.5.2-amd64-cuda-focal.tar.xz -O - | tar -x
 apt install -f ./OpenCV-4.5.2-amd64-cuda-focal/*.deb
 echo "/usr/local/opencv-4.5.2/lib" | tee /etc/ld.so.conf.d/002_opencv_4.5.2.conf > /dev/null
 ldconfig
