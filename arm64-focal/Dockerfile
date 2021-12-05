@@ -43,7 +43,6 @@ RUN cmake \
     -D BUILD_TBB=ON \
     -D BUILD_TESTS=OFF \
     -D WITH_EIGEN=OFF \
-    -D WITH_GSTREAMER=OFF \
     -D WITH_V4L=ON \
     -D WITH_LIBV4L=ON \
     -D WITH_VTK=OFF \
