@@ -1,4 +1,4 @@
-FROM nvidia/cuda:11.3.0-cudnn8-devel-ubuntu20.04 as build
+FROM nvidia/cuda:11.5.0-cudnn8-devel-ubuntu20.04 as build
 
 # the install is based on this guide
 # https://gist.github.com/raulqf/f42c718a658cddc16f9df07ecc627be7
