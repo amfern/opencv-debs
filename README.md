@@ -1,4 +1,4 @@
-# Precompiled opencv debian package for ubuntu 18.04 bionic
+# Precompiled opencv debian package for ubuntu
 
 This project uses buildx to build open cv pacakge for arm64.
 
@@ -11,26 +11,24 @@ docker buildx inspect --bootstrap
 
 ## compile:
 ```bash
-make release-amd64-tar # any x86
-make release-arm64-tar # raspberrypi 4
-make release-amd64-cuda-tar # any x86 with nvidia card
-make release-arm64-cuda-l4t-tar # nvidia jetson tx2(can be built only on nvidia jetson)
-make release-amd64-cuda-focal-tar # any x86 ubuntu 20.04  with nvidia card 
+make release-arm64-bionic
+make release-amd64-bionic
+make release-arm64-focal
+make release-amd64-focal
+make release-amd64-cuda-bionic
+make release-amd64-cuda-focal
 ```
-l4t jetson image must be build on jetson, with nvidia runtime enabled as default, as nvidia doesn't provide `nvcr.io/nvidia/cuda-arm64` container with 10.2 cuda.
-so libcuda.so and other libcublas.so must be mounted by the runtime
-https://forums.developer.nvidia.com/t/libcublas-file-size-is-0-in-jetson-docker-image/180676
+For l4t support please refer to https://github.com/timongentzsch/Jetson_Ubuntu20_Images or https://github.com/dusty-nv/jetson-containers
 
 ## installation
-Download from (https://github.com/amfern/opencv-4.2-ubuntu-bionic-arm64-debs/releases)[releases], untar and install with apt
+All the recent release can be downloaded from this repo 
+Download from the [release](release) direcotry, untar and install with apt
 
-opencv will be installed into `/usr/local/<OPENCV VERSION>`, so the linker will need to point to this directory
+opencv will be installed into `/usr/local`
 
 For example:
 ```bash
-wget -c https://github.com/amfern/opencv-4.2-ubuntu-bionic-arm64-debs/releases/download/0.0.8/OpenCV-4.5.2-amd64-cuda-focal.tar -O - | tar -x
+wget -c https://github.com/amfern/opencv-4.2-ubuntu-bionic-arm64-debs/raw/master/release/OpenCV-4.5.2-amd64-cuda-focal.tar -O - | tar -x
 cd ./OpenCV-4.5.2-amd64-cuda-focal
 apt install -y --no-install-recommends ./*.deb
-echo "/usr/local/opencv-4.5.2/lib" | tee /etc/ld.so.conf.d/002_opencv_4.5.2.conf > /dev/null
-ldconfig
 ```
