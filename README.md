@@ -22,13 +22,13 @@ For l4t support please refer to https://github.com/timongentzsch/Jetson_Ubuntu20
 
 ## installation
 All the recent release can be downloaded from this repo 
-Download from the [release](release) direcotry, untar and install with apt
+Download from the [releases](https://github.com/amfern/opencv-4.2-ubuntu-bionic-arm64-debs/releases) direcotry, untar and install with apt
 
 opencv will be installed into `/usr/local`
 
 For example:
 ```bash
-wget -c https://github.com/amfern/opencv-4.2-ubuntu-bionic-arm64-debs/raw/master/release/OpenCV-4.5.2-amd64-cuda-focal.tar -O - | tar -x
+wget -c https://github.com/amfern/opencv-4.2-ubuntu-bionic-arm64-debs/releases/download/0.0.9/OpenCV-4.5.2-amd64-cuda-focal.tar -O - | tar -x
 cd ./OpenCV-4.5.2-amd64-cuda-focal
 apt install -y --no-install-recommends ./*.deb
 ```
